@@ -19,6 +19,21 @@
     height: 100px;
     }
 
+    .listNone{
+        animation: dissapear ease-in-out 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    .displayno{
+        display:none;
+    }
+
+    .list{
+        animation: appear ease-in-out 0.5s;
+        display:flex;
+        flex-direction: column; 
+        justify-content: center;
+    }
 
     @keyframes logoScaling {
         0% {
@@ -34,6 +49,37 @@
         } 
     }
 
+    @keyframes appear {
+        0%{
+            transform: scale(0);
+            opacity: 0%;
+        }
+        100%{
+            transform: scale(1);
+            opacity: 100%;
+        }
+    }
+
+    @keyframes dissapear{
+        0%{
+            
+        }
+        10%{
+            transform: scale(1.1);
+        }
+        100%{
+            transform: scale(0);
+            opacity: 0%;
+            display:none;
+        }
+    }
+
+    @keyframes slide{
+        0%{
+            transform:
+        }
+    }
+
     .boxshadow{
         box-shadow: 0px 0px 10px 0px black;
         backdrop-filter: blur(10px);
@@ -42,6 +88,13 @@
     
     .container{
         position: absolute; width:100vw; height:100vh; display:flex; justify-content: center;
+    }
+
+    .title:hover{
+        transition: 0.15s;
+        color: #84b392;
+        font-weight:bolder;
+        cursor: pointer;
     }
 
 </style>

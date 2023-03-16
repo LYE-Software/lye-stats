@@ -44,24 +44,34 @@ function printBaseInfo(rsp){
 
 }
 
+function showList(id){
+    elem = document.getElementById(id)
+    if (elem.className == "list"){
+        elem.className = "listNone";
+    } else {
+        elem.className = "list";
+    }
+    
+}
+
 function printAdminInfo(rsp)
 {
     document.title = "Lye Admin Stats"
     
     let info = `
     <h1>Admin Mode Info</h1>
-    <h3>Username & token list</h3>
-    <div id="previewUToek" style="display: flex; flex-direction: column; justify-content: center;">
+    <h3 class="title" onclick = "showList('previewUToek')" >Username & token list</h3>
+    <div id="previewUToek" class="displayno" >
     </div> 
-    <h3>Tokens that are signed in this week</h3>
-    <div id="signedTok" style="display: flex; flex-direction: column; justify-content: center;">
+    <h3 class="title" onclick = "showList('signedTok')" >Tokens that are signed in this week</h3>
+    <div id="signedTok" class="displayno">
     </div> 
-    <h3>Lang Feedback (feedback & token of feedbacker)</h3>
-    <div id="previewFeedback" style="display: flex; flex-direction: column; justify-content: center;">
+    <h3 class="title" onclick = "showList('previewFeedback')" >Lang Feedback (feedback & token of feedbacker)</h3>
+    <div id="previewFeedback" class="displayno" >
     </div> 
-    <h3>Lang Studysheet count: ${rsp[8]}</h3>
-    <h3>Lang Studysheet list (name of sheet & token)</h3>
-    <div id="previewSS" style="display: flex; flex-direction: column; justify-content: center;">
+    <h3 class="title">Lang Studysheet count: ${rsp[8]}</h3>
+    <h3 class="title" onclick = "showList('previewSS')">Lang Studysheet list (name of sheet & token)</h3>
+    <div id="previewSS" class="displayno" >
     </div> 
     
 
