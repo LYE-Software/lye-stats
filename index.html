@@ -4,8 +4,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lye Stats</title>
-    <script src="https://lye.software/js/background.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.147.0/three.min.js"></script>
+    <!-- <script src="https://lye.software/js/background.js"></script> -->
     <script src="https://lye.software/js/perlin.js"></script>
+    <link rel="icon" href="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -37,10 +39,13 @@
         -webkit-backdrop-filter: blur(5px);
     }
     
+    .container{
+        position: absolute; width:100vw; height:100vh; display:flex; justify-content: center;
+    }
 
 </style>
 <body style="background-color: white;">
-    <div style="position: absolute; width:100vw; height:100vh; display:flex; justify-content: center;">
+    <div class= "container" style="display:none;">
         <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
             <div class="boxshadow" style="height:50vh; width: 50vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center;">
                 <h2 style="font-family: 'Montserrat', sans-serif;">Gathering Server Data...</h2>
@@ -49,6 +54,156 @@
 
         </div>
     </div>
+
+    <div class="container" >
+        <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
+            <div class="boxshadow" style="font-family: 'Montserrat', sans-serif; height:70vh; width: 70vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center; overflow: scroll;">
+                <img style= "width:100px; height:100px; position: absolute; left:0; top:0;" src="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
+                <h1 style="right:0; top:0; position: absolute; margin-right: 30px;">Lye Account System Data</h1>
+                <div style="width:40vw; height: 40vh; text-align: left;">
+                    <h3 style="text-align: left;">Number of accounts with unique emails: </h3>
+                    <h3 style="text-align: left;">Week number: </h3>
+                    <h3 style="text-align: left;"># of logged in users this week: </h3>
+                    <h3>Total # of sessionIDs: </h3>
+                    <h1>Admin Mode Info</h1>
+                    <h3>Username & token list</h3>
+                    <h3>Tokens logged in</h3>
+                    <h3>Lang Studysheet count</h3>
+                    <h3>Lang Studysheet list (name of sheet & token)</h3>
+                    <h3>Lang Feedback (feedback & token of feedbacker)</h3>
+                </div>
+                <!-- <div style="width:10vw; height:5vh; border-radius:10px; border: 3px solid black; display: flex; flex-direction: column; justify-content: center;">Admin Mode</div> -->
+            </div>
+
+        </div>
+    </div>
 </body>
-    
+<script>
+
+    color = 0xffffff
+    pointcolor = 0x000000
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        color = 0x000000
+        pointcolor = 0xffffff
+
+        var style = document.createElement('style');
+        style.innerHTML = `
+            body {
+                --primary-color: #000000 !important;
+                --secondary-color: #ffffff !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+    var renderer = new THREE.WebGLRenderer(antiAlias = true);
+    renderer.setSize( window.innerWidth, window.innerHeight);
+    rendererElement = renderer.domElement
+    rendererElement.style.position = 'absolute'
+    rendererElement.style.top = 0
+    rendererElement.style.left = 0
+    rendererElement.style.zIndex = -5
+    document.body.appendChild( rendererElement );
+
+    // loop over a 2D grid of points
+
+    var doneLoading = false;
+
+    async function create_points() {
+        spheres = []
+        sphereHeightOffset = []
+        currentTime = new Date().getTime()
+        for ( var x = -40; x <= 40; x += 1 ) {
+            for ( var z = -20; z <= 5; z += 1) {
+                var geometry = new THREE.SphereGeometry( 0.05, 32, 32 );
+                var material = new THREE.MeshBasicMaterial( {color: pointcolor} )
+                var sphere = new THREE.Mesh( geometry, material );
+                sphere.position.x = x
+                sphere.position.z = z
+
+                var height = Math.pow(z, 2) / 70
+                sphere.position.y = height
+
+                sphereHeightOffset.push(height)
+                spheres.push(sphere)
+                scene.add( sphere );
+            }
+            var newTime = new Date().getTime()
+            if (newTime - currentTime > 50) {
+                await new Promise(r => setTimeout(r, 0));
+                currentTime = newTime
+            }
+        }
+
+        doneLoading = true
+    }
+
+    create_points()
+
+    // set the skybox to white
+    scene.background = new THREE.Color( color );
+
+    camera.position.z = 10;
+    camera.position.y = 5;
+
+    time = 0
+    rate = 2
+    noise.seed(Math.random())
+
+    var animate = function () {
+        requestAnimationFrame( animate );
+        renderer.render( scene, camera );
+        
+        time_since_last_resize += 1;
+
+        for (var i = 0; i < spheres.length; i++) {
+            var sphere = spheres[i]
+            var x = sphere.position.x
+            var z = sphere.position.z
+            var height = noise.simplex2(x/10 + (time / rate), z/10 + (time / rate)) * 0.5
+            sphere.position.y = height + sphereHeightOffset[i]
+
+            var color = new THREE.Color( 0xffffff );
+            color.setHSL( 0, 0, height + 0.5 );
+            sphere.material.color = color
+
+            sphere.scale.x = 1 + height
+            sphere.scale.y = 1 + height
+            sphere.scale.z = 1 + height
+        }
+
+        time += 0.01
+
+        if (time_since_last_resize > 5) {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+            window_needs_resize = false;
+        }
+    };
+
+    var window_needs_resize = false;
+    var time_since_last_resize = 0;
+
+    window.addEventListener( 'resize', onWindowResize, false );
+
+    function onWindowResize(){
+        time_since_last_resize = 0;
+        window_needs_resize = true;
+    }
+
+    animate();
+
+    // var interval = setInterval(function() {
+    //     if (doneLoading) {
+    //         clearInterval(interval);
+    //         document.getElementById("logoContainer").classList.add("fadeOut");
+    //     }
+    // }, 5);
+</script>
 </html>
