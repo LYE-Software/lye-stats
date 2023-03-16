@@ -47,12 +47,9 @@ function printBaseInfo(rsp){
 function printAdminInfo(rsp)
 {
     document.title = "Lye Admin Stats"
-    var moreInfo = `
-    <h1>Admin Mode Info</h1>
-    <h3>Lang Studysheet count: ${rsp[8]}</h3>`
-    document.getElementById("infoHolder").innerHTML += moreInfo;
-    let info = `
     
+    let info = `
+    <h1>Admin Mode Info</h1>
     <h3>Username & token list</h3>
     <div id="previewUToek" style="display: flex; flex-direction: column; justify-content: center;">
     </div> 
@@ -62,6 +59,7 @@ function printAdminInfo(rsp)
     <h3>Lang Feedback (feedback & token of feedbacker)</h3>
     <div id="previewFeedback" style="display: flex; flex-direction: column; justify-content: center;">
     </div> 
+    <h3>Lang Studysheet count: ${rsp[8]}</h3>
     <h3>Lang Studysheet list (name of sheet & token)</h3>
     <div id="previewSS" style="display: flex; flex-direction: column; justify-content: center;">
     </div> 

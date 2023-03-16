@@ -1,0 +1,14 @@
+"[num of accounts]-seperator-[current week number]-seperator-[# of logged in users (users with current week's sessionid]-seperator-[total # of sessionids]"
+
+"username & token list, tokens that have logged in, count of studysheets, studysheet table but just name of sheet and token, lang feedback table"
+
+because the ones that have paired values have a max of 2 pairs we can use the lang format:
+
+["nwvbug", "oucy"]-subseperator-["ankleBowl", "miwy"]-seperator- (next type of info)
+
+
+
+
+5-seperator-11-seperator-6-seperator-54-seperator-["nwvbug", "oucy"]-subseperator-["ankleBowl", "miwy"]-seperator-["studysheet name", "owner name"]-subseperator-["another studysheet", "your mother"]-subseperator-["hee hee haw", "bruh"]-seperator-["feedback", "feedbacker token"]-subseperator-["more feedback", "tate"]-seperator-tokentokentoken-subseperator-oucy-subseperator-miwi-seperator-101
+
+#ofAcc -seperator- week# -seperator- #ofloggedInUsrs -seperator- total#Sessionids -seperator- username/tokenlist -seperator- studysheets -seperator- feedback -seperator- tokensSignedInthisWeek -seperator- studysheetCount 
