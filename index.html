@@ -65,9 +65,9 @@
         -webkit-backdrop-filter: blur(5px);
     }
     
-    .container{
+    /* .container{
         position: absolute; width:100vw; height:100vh; display:flex; justify-content: center;
-    }
+    } */
 
     .title:hover{
         transition: 0.15s;
@@ -76,47 +76,66 @@
         cursor: pointer;
     }
 
+    @keyframes logoLoading {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .logoLoading {
+        animation: logoLoading 1s infinite;
+    }
+
 </style>
 <body onload="checkLogin()">
-    <div class= "container" id = "loading" style="z-index: 2;">
-        <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
-            <div class="" style="height:50vh; width: 50vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center;">
-                <h2 style="font-family: 'Montserrat', sans-serif;">Lye Account System Data is not yet available for viewing. Please check back later.</h2>
-                <!-- <img style= "width:100px; height:100px;" class="animatedLoader" src="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png"> -->
-            </div>
-
+    <div class="horizontalFlex" style="width: 100vw; height: 100vh; z-index: 2;">
+        <div class="container" style="width: 475px;">
+            <div class="header">Error</div>
+            <div class="divider"></div>
+            <div>Lye Account System Data is not yet available for viewing. Please check back later.</div>
+            <div class="divider"></div>
         </div>
     </div>
-    <div class= "container" id = "loading" style="z-index: 1;">
-        <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
-            <div class="" style="height:50vh; width: 50vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center;">
-                <h2 style="font-family: 'Montserrat', sans-serif;">Gathering Server Data...</h2>
-                <img style= "width:100px; height:100px;" class="animatedLoader" src="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
+    <div class="horizontalFlex" style="width: 100vw; height: 100vh; z-index: 1;">
+        <div class="container" style="width: 475px;">
+            <div class="horizontalFlex" style="justify-content:space-between">
+                <div class="header">Please wait</div>
+                <img style="width:100px; height:100px;" class="logoLoading" src="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
             </div>
-
+            <div class="divider"></div>
+            <div style="font-family: 'Montserrat', sans-serif;">Gathering Server Data. This may take a moment.</div>
+            <div class="divider"></div>
         </div>
     </div>
-
-    <div class="container" style="" id="mainElements">
-        <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
-            <div class="boxshadow" style="font-family: 'Montserrat', sans-serif; height:70vh; width: 70vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center; overflow: scroll;">
-                <img style= "width:100px; height:100px; position: absolute; left:0; top:0;" src="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
-                <h1 style="right:0; top:0; position: absolute; margin-right: 30px;">Lye Account System Data</h1>
-                <div style="width:40vw; height: 40vh; text-align: left;" id="infoHolder">
-                    <!-- <h3 style="text-align: left;">Number of accounts with unique emails: </h3>
-                    <h3 style="text-align: left;">Week number: </h3>
-                    <h3 style="text-align: left;"># of logged in users this week: </h3>
-                    <h3>Total # of sessionIDs:</h3>
-                    <h1>Admin Mode Info</h1>
-                    <h3>Username & token list</h3>
-                    <h3>Tokens logged in</h3>
-                    <h3>Lang Studysheet count</h3>
-                    <h3>Lang Studysheet list (name of sheet & token)</h3>
-                    <h3>Lang Feedback (feedback & token of feedbacker)</h3> -->
-                </div>
-                <!-- <div style="width:10vw; height:5vh; border-radius:10px; border: 3px solid black; display: flex; flex-direction: column; justify-content: center;">Admin Mode</div> -->
+    <div class="horizontalFlex" style="width: 100vw; height: 100vh; z-index: 1;" id="mainelements">
+        <div class="container">
+            <div class="horizontalFlex" style="justify-content:space-between">
+                <div class="header">LAS Data</div>
+                <img style="width:100px; height:100px;" src="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
             </div>
+            <div id="infoHolder">
+                <div class="divider"></div>
+                <div>Number of accounts with unique emails: </div>
+                <div style="height: 10px; width: 10px;"></div>
+                <div>Week number: </div>
+                <div style="height: 10px; width: 10px;"></div>
+                <div># of logged in users this week: </div>
+                <div style="height: 10px; width: 10px;"></div>
+                <div>Total # of sessionIDs:</div>
+                <div class="divider"></div>
 
+                <div>Username & token list</div>
+                <div>Tokens logged in</div>
+                <div>Lang Studysheet count</div>
+                <div>Lang Studysheet list (name of sheet & token)</div>
+                <div>Lang Feedback (feedback & token of feedbacker)</div>
+            </div>
         </div>
     </div>
 </body>
