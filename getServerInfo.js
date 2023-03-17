@@ -47,13 +47,32 @@ function printBaseInfo(rsp){
 function showList(id){
     elem = document.getElementById(id)
     if (elem.className == "list"){
+
+        console.log("setting name to listnone")
         elem.className = "listNone";
+        dontDisplay(elem);
+        //elem.addEventListener("animationend", dontDisplay(elem),{ once: true });
     } else {
+        console.log("setting name to list")
+        var listNones = document.getElementsByClassName("listNone")
+        
+        // updateListNone();
+        elem.style.display = "flex";
+        elem.style.position = "relative";
         elem.className = "list";
     }
     
 }
 
+function dontDisplay(list){
+    console.log("UNDISPLAYING")
+    setTimeout(function(){
+        console.log("ran undisplay")
+        list.style.display="none";
+        list.style.position = "absolute";
+    }, 500)
+    
+}
 function printAdminInfo(rsp)
 {
     document.title = "Lye Admin Stats"
@@ -69,7 +88,7 @@ function printAdminInfo(rsp)
     <h3 class="title" onclick = "showList('previewFeedback')" >Lang Feedback (feedback & token of feedbacker)</h3>
     <div id="previewFeedback" class="displayno" >
     </div> 
-    <h3 class="title">Lang Studysheet count: ${rsp[8]}</h3>
+    <h3>Lang Studysheet count: ${rsp[8]}</h3>
     <h3 class="title" onclick = "showList('previewSS')">Lang Studysheet list (name of sheet & token)</h3>
     <div id="previewSS" class="displayno" >
     </div> 
