@@ -11,13 +11,106 @@
     <link rel="icon" href="https://raw.githubusercontent.com/nwvbug/nwvbug-logos/main/lye%20logo/lyelogo.png">
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    /* THE LOGO ANIMATION */
+    /* (START) */
+    #logoContainer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
-    .animatedLoader { 
-    animation: logoScaling ease-in-out 1.5s infinite;
-    width: 100px;
-    height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: var(--primary-color);
+
+        z-index: 25;
+
+        pointer-events: none;
     }
+
+    .fadeOut {
+        animation: fadeOut 0.15s ease-in;
+        animation-fill-mode: forwards !important;
+        animation-delay: 1s;
+    }
+
+    #logoContainer img {
+        position: absolute;
+        height: 400px;
+        width: auto;
+    }
+
+    .pedal {
+        z-index: 100;
+        opacity: 0;
+    }
+
+    .leftPedal {
+        animation: slideInLeft 0.5s ease-out;
+        animation-fill-mode: forwards !important;
+    }
+
+    @keyframes slideInLeft {
+        0% {
+            transform: translateX(-300px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .rightPedal {
+        animation: slideInRight 0.5s ease-out;
+        animation-fill-mode: forwards !important;
+    }
+
+    @keyframes slideInRight {
+        0% {
+            transform: translateX(300px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .grass {
+        z-index: 50;
+        animation: fadeIn 0.25s ease-in;
+        animation-fill-mode: forwards !important;
+        opacity: 0;
+        animation-delay: 0.5s;
+    }
+
+    @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
+    /* (END) */
+
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
     .listNone{
         animation: dissapear ease-in-out 0.5s;
@@ -34,20 +127,6 @@
         display:flex;
         flex-direction: column; 
         justify-content: center;
-    }
-
-    @keyframes logoScaling {
-        0% {
-            transform: scale(0.8);
-        }
-        
-        50% {
-            transform: scale(1.2);
-        }
-
-        100% {
-            transform: scale(0.8);
-        } 
     }
 
     @keyframes appear {
@@ -98,8 +177,21 @@
     }
 
 </style>
-<body style="background-color: white;" onload="checkLogin()">
-    <div class= "container" id = "loading" style="z-index: 5000;">
+<body onload="checkLogin()">
+    <div id="logoContainer">
+        <img class="pedal leftPedal" style="animation-delay: 0.2s" src="rawchester/bottom-left.png">
+        <img class="pedal leftPedal" style="animation-delay: 0.1s" src="rawchester/middle-left.png">
+        <img class="pedal leftPedal" style="animation-delay: 0" src="rawchester/top-left.png">
+
+        <img class="pedal rightPedal" style="animation-delay: 0.2s" src="rawchester/bottom-right.png">
+        <img class="pedal rightPedal" style="animation-delay: 0.1s" src="rawchester/middle-right.png">
+        <img class="pedal rightPedal" style="animation-delay: 0" src="rawchester/top-right.png">
+
+        <img class="grass" src="rawchester/grass.png">
+    </div>
+
+
+    <div class= "container" id = "loading" style="z-index: 2;">
         <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
             <div class="" style="height:50vh; width: 50vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center;">
                 <h2 style="font-family: 'Montserrat', sans-serif;">Lye Account System Data is not yet available for viewing. Please check back later.</h2>
@@ -108,7 +200,7 @@
 
         </div>
     </div>
-    <div class= "container" id = "loading" style="z-index: 500;">
+    <div class= "container" id = "loading" style="z-index: 1;">
         <div style="height:100%; display: flex; flex-direction: column; justify-content: center;">
             <div class="" style="height:50vh; width: 50vw; background-color: white; display: flex; flex-direction: column; justify-content: center; text-align: center; align-items: center;">
                 <h2 style="font-family: 'Montserrat', sans-serif;">Gathering Server Data...</h2>
